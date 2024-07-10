@@ -1,0 +1,104 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const lists = [
+        { name: 'イチゴ', img: 'strawberry.jpg', price: 450 },
+        { name: 'ライム', img: 'lime.jpg', price: 400 },
+        { name: 'マンゴー', img: 'mango.jpg', price: 500 },
+        { name: 'レモン', img: 'lemon.jpg', price: 400 },
+        { name: 'イチジク', img: 'fig.jpg', price: 500 },
+        { name: 'リンゴ', img: 'apple.jpg', price: 400 },
+        { name: 'コーラ', img: 'cola.jpg', price: 250 }
+    ];
+
+    const menu = document.querySelector('#menu');
+    const orderList = document.querySelector('#orderList');
+    const totalPrice = document.querySelector('#totalPrice');
+    const personalInfo = document.querySelector('#personalInfo');
+    let cart = [];
+
+    function showMenuItems() {
+        lists.forEach((item, index) => {
+            const content = `
+                <div class="menu-item">
+                    <img src="images/${item.img}" alt="${item.name}">
+                    <h2>${item.name}</h2>
+                    <p>${item.price}円</p>
+                    <button onclick="addToCart(${index})">注文する</button>
+                </div>`;
+            menu.insertAdjacentHTML('beforeend', content);
+        });
+    }
+
+    window.addToCart = function(index) {
+        const selectedItem = lists[index];
+        cart.push(selectedItem);
+        showOrderSummary();
+    }
+
+    window.removeFromCart = function(index) {
+        cart.splice(index, 1);
+        showOrderSummary();
+    }
+
+    function showOrderSummary() {
+        orderList.innerHTML = '';
+
+        let total = 0;
+        cart.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.className = 'order-item';
+
+            const itemText = document.createElement('span');
+            itemText.textContent = `${item.name} - ${item.price}円`;
+
+            const cancelButton = document.createElement('button');
+            cancelButton.textContent = '取り消す';
+            cancelButton.addEventListener('click', () => {
+                removeFromCart(index);
+            });
+
+            li.appendChild(itemText);
+            li.appendChild(cancelButton);
+            orderList.appendChild(li);
+            total += item.price;
+        });
+
+        totalPrice.textContent = `合計金額: ${total}円`;
+    }
+
+    document.querySelector('#proceedToPersonalInfo').addEventListener('click', () => {
+        document.querySelector('#orderSummary').classList.add('hidden');
+        personalInfo.classList.remove('hidden');
+    });
+
+    document.querySelector('#personal-info-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+
+        const orderData = {
+            items: cart,
+            total: cart.reduce((sum, item) => sum + item.price, 0),
+            customer: { name, email }
+        };
+
+        fetch('submit_order.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                localStorage.setItem('orderData', JSON.stringify(orderData));
+                window.location.href = 'order_confirmation.html';
+            } else {
+                alert(data.message);
+            }
+        });
+    });
+
+    showMenuItems();
+});
