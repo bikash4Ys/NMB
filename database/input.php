@@ -13,10 +13,15 @@
     <div class="container">
         <h2 class="h2">Items Registration</h2>
         <form action="add.php" method="post" enctype="multipart/form-data">
-            <div class="mb-3 form-floating">
-                <input id="code" type="text" class="form-control" name="code" value="<?= @$item['code'] ?>">
-                <label for="code">Code</label>
-                <p class="text-danger pt-2"><?= @$errors['code'] ?></p>
+        <div class="mb-3 form-floating">
+                <select id="category" class="form-select" name="category">
+                    <option value="" selected>Select</option>
+                    <option value="food">Food</option>
+                    <option value="drink">Drink</option>
+                    <option value="dessert_and_ice">Dessert and Ice</option>
+                </select>
+                <label for="category">Category</label>
+                <p class="text-danger pt-2"><?= @$errors['category'] ?></p>
             </div>
             <div class="mb-3 form-floating">
                 <input id="name" type="text" class="form-control" name="name" value="<?= @$item['name'] ?>">
@@ -32,6 +37,11 @@
                 <input id="stock" type="text" class="form-control" name="stock" value="<?= @$item['stock'] ?>">
                 <label for="stock">Quantity</label>
                 <p class="text-danger pt-2"><?= @$errors['stock'] ?></p>
+            </div>
+            <div class="mb-3 form-floating">
+                <input id="stock" type="text" class="form-control" name="about" value="<?= @$item['about'] ?>">
+                <label for="stock">about</label>
+                <p class="text-danger pt-2"><?= @$errors['about'] ?></p>
             </div>
             <div class="mb-3 form-floating">
                 <input id="image" type="file" class="form-control" name="image">
