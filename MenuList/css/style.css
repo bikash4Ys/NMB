@@ -168,3 +168,25 @@ p {
 .menu-item img:hover {
     transform: scale(1.1);
 }
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.close-button {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+

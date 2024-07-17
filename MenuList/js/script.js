@@ -1,25 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     const lists = [
-        { name: 'イチゴ', img: 'strawberry.jpg', price: 450 },
-        { name: 'ライム', img: 'lime.jpg', price: 400 },
-        { name: 'マンゴー', img: 'mango.jpg', price: 500 },
-        { name: 'レモン', img: 'lemon.jpg', price: 400 },
-        { name: 'イチジク', img: 'fig.jpg', price: 500 },
-        { name: 'リンゴ', img: 'apple.jpg', price: 400 },
-        { name: 'コーラ', img: 'cola.jpg', price: 250 }
+        { name: 'イチゴ', img: 'strawberry.jpg', price: 450, ingredients: ['いちご', '砂糖', '水'] },
+        { name: 'ライム', img: 'lime.jpg', price: 400, ingredients: ['ライム', '砂糖', '水'] },
+        { name: 'マンゴー', img: 'mango.jpg', price: 500, ingredients: ['マンゴー', '砂糖', '水'] },
+        { name: 'レモン', img: 'lemon.jpg', price: 400, ingredients: ['レモン', '砂糖', '水'] },
+        { name: 'イチジク', img: 'fig.jpg', price: 500, ingredients: ['いちじく', '砂糖', '水'] },
+        { name: 'リンゴ', img: 'apple.jpg', price: 400, ingredients: ['りんご', '砂糖', '水'] },
+        { name: 'コーラ', img: 'cola.jpg', price: 250, ingredients: ['炭酸水', '砂糖', 'カラメル色素'] }
     ];
 
     const menu = document.querySelector('#menu');
     const orderList = document.querySelector('#orderList');
     const totalPrice = document.querySelector('#totalPrice');
     const personalInfo = document.querySelector('#personalInfo');
+    const ingredientModal = document.querySelector('#ingredientModal');
+    const ingredientTitle = document.querySelector('#ingredientTitle');
+    const ingredientList = document.querySelector('#ingredientList');
     let cart = [];
 
     function showMenuItems() {
         lists.forEach((item, index) => {
             const content = `
                 <div class="menu-item">
-                    <img src="images/${item.img}" alt="${item.name}">
+                    <img src="images/${item.img}" alt="${item.name}" onclick="showIngredients(${index})">
                     <h2>${item.name}</h2>
                     <p>${item.price}円</p>
                     <button onclick="addToCart(${index})">注文する</button>
@@ -37,6 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.removeFromCart = function(index) {
         cart.splice(index, 1);
         showOrderSummary();
+    }
+
+    window.showIngredients = function(index) {
+        const selectedItem = lists[index];
+        ingredientTitle.textContent = selectedItem.name;
+        ingredientList.textContent = `材料: ${selectedItem.ingredients.join(', ')}`;
+        ingredientModal.classList.remove('hidden');
     }
 
     function showOrderSummary() {
@@ -98,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(data.message);
             }
         });
+    });
+
+    document.querySelector('.close-button').addEventListener('click', () => {
+        ingredientModal.classList.add('hidden');
     });
 
     showMenuItems();
