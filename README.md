@@ -8,4 +8,4 @@
   b. Swimming (Swimming customes) 
   c. Nearby places visit 
   d. Transportation avaliblity ( can ask for car to visit nearby famoius places ) 
-  e. Tour Guide ( can ask for guide for short a dayout trip )f. Venue reservation ( Ask for bbok a venue for group work , party celebration , business meeting etc.)
+  e. Tour Guide ( can ask for guide for short a dayout trip )f. Venue reservation ( Ask for book a venue for group work , party celebration , business meeting etc.)
