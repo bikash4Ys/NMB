@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <h2 class="h2">Items Registration</h2>
         <form action="add.php" method="post" enctype="multipart/form-data">
-        <div class="mb-3 form-floating">
+            <div class="mb-3 form-floating">
                 <select id="category" class="form-select" name="category">
                     <option value="" selected>Select</option>
                     <option value="food">Food</option>
@@ -24,23 +24,23 @@
                 <p class="text-danger pt-2"><?= @$errors['category'] ?></p>
             </div>
             <div class="mb-3 form-floating">
-                <input id="name" type="text" class="form-control" name="name" value="<?= @$item['name'] ?>">
+                <input id="name" type="text" class="form-control" name="name" value="<?= htmlspecialchars(@$item['name']) ?>">
                 <label for="name">Name</label>
                 <p class="text-danger pt-2"><?= @$errors['name'] ?></p>
             </div>
             <div class="mb-3 form-floating">
-                <input id="price" type="text" class="form-control" name="price" value="<?= @$item['price'] ?>">
+                <input id="price" type="number" class="form-control" name="price" value="<?= htmlspecialchars(@$item['price']) ?>">
                 <label for="price">Price</label>
                 <p class="text-danger pt-2"><?= @$errors['price'] ?></p>
             </div>
             <div class="mb-3 form-floating">
-                <input id="stock" type="text" class="form-control" name="stock" value="<?= @$item['stock'] ?>">
+                <input id="stock" type="number" class="form-control" name="stock" value="<?= htmlspecialchars(@$item['stock']) ?>">
                 <label for="stock">Quantity</label>
                 <p class="text-danger pt-2"><?= @$errors['stock'] ?></p>
             </div>
             <div class="mb-3 form-floating">
-                <input id="stock" type="text" class="form-control" name="about" value="<?= @$item['about'] ?>">
-                <label for="stock">about</label>
+                <input id="about" type="text" class="form-control" name="about" value="<?= htmlspecialchars(@$item['about']) ?>">
+                <label for="about">About</label>
                 <p class="text-danger pt-2"><?= @$errors['about'] ?></p>
             </div>
             <div class="mb-3 form-floating">
@@ -48,7 +48,7 @@
                 <label for="image">Image</label>
                 <p class="text-danger pt-2"><?= @$errors['image'] ?></p>
             </div>
-            <button class="btn btn-primary">Registration</button>
+            <button type="submit" class="btn btn-primary">Register</button>
             <a class="btn btn-outline-primary" href="./">Return</a>
         </form>
     </div>

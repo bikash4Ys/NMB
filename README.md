@@ -1,3 +1,11 @@
+UPdate
+add items for admin panel has been done , you can view them form the database folder , to run it you have to create a database which i keep in database folder named as 'nmb.sql' 
+      Step to apply 
+      go to to you phpMyAdmin panel thorough xampp >> MySQL>>admin 
+      create new databse name as 'nmb'
+      paste the  sql querries and run , 
+      complete ...    
+     
 1 . regarding Menu -Every special food of the days image will slide on homepage 
 - Items info and order details will be shown after click on menu items image . 
 - Items will be categorized diffrently based on foods types (Drinks[hot & COld ] , Beaveraouge (dessert and creams ) ,
